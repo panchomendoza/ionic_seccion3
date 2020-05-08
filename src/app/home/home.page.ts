@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, ViewChild } from '@angular/core';
 import { ANIMALES } from '../../data/data.animales';
-
 import { Animal } from '../../interfaces/animal.interface';
 
 @Component({
@@ -14,6 +12,7 @@ export class HomePage {
   animales:Animal[] = [];  
   audio = new Audio();
   audioTiempo: any;
+  ordenando:boolean = false;
   
   constructor() {
 
@@ -65,6 +64,18 @@ export class HomePage {
       this.animales = ANIMALES.slice(0);
       refresher.target.complete();
     }, 1500);
+  }
+
+  reordenar_animales(indices:any){
+    // The `from` and `to` properties contain the index of the item
+    // when the drag started and ended, respectively
+    console.log('Dragged from index', indices.detail.from, 'to', indices.detail.to);
+
+    // Finish the reorder and position the item in the DOM based on
+    // where the gesture ended. This method can also be called directly
+    // by the reorder group
+    indices.detail.complete();
+
   }
 
 }
